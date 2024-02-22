@@ -532,14 +532,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3907369438253171965, guid: 143141f0e41f94248b065af63ebfdf11, type: 3}
-      propertyPath: m_Drag
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 3907369438253171965, guid: 143141f0e41f94248b065af63ebfdf11, type: 3}
-      propertyPath: m_Constraints
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 6384858887385560611, guid: 143141f0e41f94248b065af63ebfdf11, type: 3}
       propertyPath: m_Name
       value: Rocket

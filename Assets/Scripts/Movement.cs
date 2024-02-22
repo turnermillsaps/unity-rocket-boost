@@ -5,12 +5,15 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     Rigidbody rb;
+    AudioSource audioSource;
+
     [SerializeField] float mainThrust = 1000f;
     [SerializeField] float rotationSpeed = 100f;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -27,6 +30,18 @@ public class Movement : MonoBehaviour
             // Add relative force to rigid body's relative position, 1 on x, 1 on y and 1 on z
             // Shorthand for up would be Vector3.up
             rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
+            // Start the audioSource for rocket boost noise
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+        }
+        else
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
         }
     }
 
