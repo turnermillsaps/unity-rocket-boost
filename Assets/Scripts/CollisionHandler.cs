@@ -3,21 +3,19 @@ using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
+    [SerializeField] float invokeDelay = 1.0f;
     void OnCollisionEnter(Collision collision)
     {
         switch (collision.gameObject.tag)
         {
             case "Finish":
-                LoadNextLevel();
+                StartLoadLevelSequence();
                 break;
             case "Friendly":
                 Debug.Log("This thing is friendly");
                 break;
-            case "Fuel":
-                Debug.Log("Picked up fuel.");
-                break;
             default:
-                ReloadLevel();
+                StartCrashSequence();
                 break;
         }
     }
@@ -36,5 +34,24 @@ public class CollisionHandler : MonoBehaviour
             nextSceneIndex = 0; // Reset to first scene if we reach the end
         }
         SceneManager.LoadScene(nextSceneIndex);
+    }
+
+    void StartLoadLevelSequence()
+    {
+        DisableMovement();
+        Invoke("LoadNextLevel", invokeDelay);
+    }
+
+    void StartCrashSequence()
+    {
+        // TODO add SFX upon crash
+        // TODO add particle effect upon crash
+        DisableMovement();
+        Invoke("ReloadLevel", invokeDelay);
+    }
+
+    void DisableMovement()
+    {
+        GetComponent<Movement>().enabled = false;
     }
 }
