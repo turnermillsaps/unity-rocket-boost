@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    [SerializeField] float mainThrust = 1000f;
+    [SerializeField] float rotationSpeed = 100f;
+    [SerializeField] AudioClip mainEngine;
+
     Rigidbody rb;
     AudioSource audioSource;
 
-    [SerializeField] float mainThrust = 1000f;
-    [SerializeField] float rotationSpeed = 100f;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +35,7 @@ public class Movement : MonoBehaviour
             // Start the audioSource for rocket boost noise
             if (!audioSource.isPlaying)
             {
-                audioSource.Play();
+                audioSource.PlayOneShot(mainEngine);
             }
         }
         else
