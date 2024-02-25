@@ -7,6 +7,9 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] AudioClip success;
     [SerializeField] AudioClip failure;
 
+    [SerializeField] ParticleSystem successParticles;
+    [SerializeField] ParticleSystem failureParticles;
+
     AudioSource audioSource;
 
     bool isTransitioning = false;
@@ -55,6 +58,7 @@ public class CollisionHandler : MonoBehaviour
         isTransitioning = true;
         audioSource.Stop();
         DisableMovement();
+        successParticles.Play();
         audioSource.PlayOneShot(success);
         Invoke("LoadNextLevel", invokeDelay);
     }
@@ -62,10 +66,10 @@ public class CollisionHandler : MonoBehaviour
     void StartCrashSequence()
     {
         isTransitioning = true;
-        // TODO add particle effect upon crash
         audioSource.Stop();
         DisableMovement();
         audioSource.PlayOneShot(failure);
+        failureParticles.Play();
         Invoke("ReloadLevel", invokeDelay);
     }
 
