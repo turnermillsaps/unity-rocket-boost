@@ -30,30 +30,40 @@ public class Movement : MonoBehaviour
 
     void ProcessThrust()
     {
-        if (Input.GetKey(KeyCode.Space)) 
+        if (Input.GetKey(KeyCode.Space))
         {
-            // Add relative force to rigid body's relative position, 1 on x, 1 on y and 1 on z
-            // Shorthand for up would be Vector3.up
-            rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
-            // Start the audioSource for rocket boost noise
-            if (!audioSource.isPlaying)
-            {
-                audioSource.PlayOneShot(mainEngine);
-            }
-
-            if (!mainBooster.isPlaying)
-            {
-                mainBooster.Play();
-            }
+            StartThrusting();
         }
         else
         {
-            if (audioSource.isPlaying)
-            {
-                audioSource.Stop();
-            }
-            mainBooster.Stop();
+            StopThrusting();
         }
+    }
+
+    void StartThrusting()
+    {
+        // Add relative force to rigid body's relative position, 1 on x, 1 on y and 1 on z
+        // Shorthand for up would be Vector3.up
+        rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
+        // Start the audioSource for rocket boost noise
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(mainEngine);
+        }
+
+        if (!mainBooster.isPlaying)
+        {
+            mainBooster.Play();
+        }
+    }
+
+    void StopThrusting()
+    {
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+        mainBooster.Stop();
     }
 
     void ProcessRotation()
