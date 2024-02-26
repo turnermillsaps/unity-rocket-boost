@@ -40,6 +40,18 @@ public class Movement : MonoBehaviour
         }
     }
 
+    void ProcessRotation()
+    {
+        if (Input.GetKey(KeyCode.A))
+        {
+            ApplyRotation(rotationSpeed);
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            ApplyRotation(-rotationSpeed);
+        }
+    }
+
     void StartThrusting()
     {
         // Add relative force to rigid body's relative position, 1 on x, 1 on y and 1 on z
@@ -64,18 +76,6 @@ public class Movement : MonoBehaviour
             audioSource.Stop();
         }
         mainBooster.Stop();
-    }
-
-    void ProcessRotation()
-    {
-        if (Input.GetKey(KeyCode.A))
-        {
-            ApplyRotation(rotationSpeed);
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            ApplyRotation(-rotationSpeed);
-        }
     }
 
     private void ApplyRotation(float rotationThisFrame)
